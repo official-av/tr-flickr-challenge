@@ -8,6 +8,7 @@
   <!-- paginator -->
   <mat-paginator [length]="total$|async"
                  pageSize="10"
+                 showFirstLastButtons="true"
                  (page)="changePage($event)"
   >
   </mat-paginator>
