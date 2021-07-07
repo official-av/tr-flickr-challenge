@@ -1,27 +1,55 @@
-# Ng12Seed
+<!-- Please update value in the {}  -->
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
+<h1 align="center">TR Flickr Challenge</h1>
 
-## Development server
+<div align="center">
+   Solution for a challenge from  <a href="https://www.talentrocket.de/" target="_blank">TalentRocket GmBH</a>.
+</div>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<div align="center">
+  <h3>
+    <a href="https://official-av.github.io/tr-flickr-challenge">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://github.com/official-av/tr-flickr-challenge">
+      Solution
+    </a>
+  </h3>
+</div>
 
-## Code scaffolding
+<!-- TABLE OF CONTENTS -->
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Table of Contents
 
-## Build
+- [Overview](#overview)
+  - [Built With](#built-with)
+- [Features](#features)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<!-- OVERVIEW -->
 
-## Running unit tests
+## Overview
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- You can check the demo from the above demo link hosted on github pages.
+- I had a pretty good learning experience completing this challenge.
 
-## Running end-to-end tests
+### Built With
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Angular 12
+- Angular Material
+- Flex Layout
+- RxJS
+- SCSS
 
-## Further help
+## Future Improvements
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Better Styling
+- Better Root Layout
+- Centralised Error handling with interceptor
+
+## Contact
+
+- GitHub [@official-av](https://github.com/official-av)
+- LinkedIn [Anmol Vashistha](https://www.linkedin.com/in/anmolvashistha/)
