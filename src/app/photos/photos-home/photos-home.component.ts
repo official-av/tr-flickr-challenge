@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {PhotosService} from '../photos.service';
-import {FlickrPhoto} from '../FlickrPhoto.interface';
-import {take, tap} from 'rxjs/operators';
+import {catchError, take, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-photos-home',
@@ -14,9 +15,10 @@ export class PhotosHomeComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   public tags = [] as string[];
   public readonly sortBy = this.photosService.sortBy$;
-  public photos = [] as FlickrPhoto[];
+  public photos$ = this.photosService.photos$;
 
-  constructor(private photosService: PhotosService) {
+  constructor(private photosService: PhotosService,
+              private toastService: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -43,13 +45,18 @@ export class PhotosHomeComponent implements OnInit {
     this.photosService.getImageWithTags(this.tags).pipe(
       (take(1),
         tap(() => this.clear())),
-    ).subscribe(res =>
-      this.photos.push(res));
+      catchError(err => this.errorHandler(err))
+    ).subscribe();
     // TODO: error handling for single image
   }
 
   sortByAttribute(attribute: string) {
     this.photosService.sortByAction.next(attribute);
+  }
+
+  errorHandler(err: any) {
+    this.toastService.error(err.message);
+    return of([]);
   }
 
 }

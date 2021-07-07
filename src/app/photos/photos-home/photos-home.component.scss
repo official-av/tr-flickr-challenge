@@ -1,6 +1,32 @@
-.photo-card {
-  .search-photo {
-    width: 150px;
-    height: 150px;
+.photo-details-wrapper {
+  position: relative;
+
+  .photo-views {
+    position: absolute;
+    color: white;
+    z-index: 2;
+    left: 40%;
+    font-size: 32px;
+    top: 30%;
+  }
+
+  .photo-tags {
+    position: absolute;
+    background: white;
+    z-index: 2;
+    font-size: 18px;
+  }
+
+  .photo-card {
+    .photo-owner {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .search-photo {
+      height: 150px;
+    }
   }
 }
+

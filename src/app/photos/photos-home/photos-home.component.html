@@ -46,7 +46,7 @@
   </div>
 
   <div class="requests-wrapper" fxLayout="row wrap" fxLayoutGap="20px">
-    <ng-container *ngFor="let photo of photos">
+    <ng-container *ngFor="let photo of photos$|async">
       <ng-container *ngTemplateOutlet="photoDetails;context:{photo:photo}"></ng-container>
     </ng-container>
   </div>
@@ -54,16 +54,20 @@
 
 <!-- photo details template -->
 <ng-template let-photo='photo' #photoDetails>
-  <mat-card class="photo-card">
-    <mat-card-header>
-      <mat-card-title>{{photo.tags}}</mat-card-title>
-      <mat-card-subtitle>{{photo.views}}</mat-card-subtitle>
-    </mat-card-header>
-    <img class="search-photo" mat-card-image [src]="photo.url_q" alt="Photo Searched by Tag">
-    <mat-card-content>
-      <span>{{photo.ownername}}</span>
-      <span>{{photo.dateupload}}</span>
-      <span>{{photo.datetaken}}</span>
-    </mat-card-content>
-  </mat-card>
+  <div class="photo-details-wrapper">
+    <span class="photo-tags">{{photo.tags}}</span>
+    <span class="photo-views">{{photo.views}}</span>
+    <mat-card class="photo-card">
+      <img class="search-photo" mat-card-image [src]="photo.url_q" alt="Photo Searched by Tag">
+      <mat-card-content fxLayout="column">
+        <span class="photo-owner">{{photo.ownername|titlecase}}</span>
+        <div class="dates-wrapper" fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5px" fxLayoutGap="20px">
+          <span>Uploaded</span>
+          <span>{{photo.dateupload|date:'dd.MM.yyyy'}}</span>
+          <span>Taken</span>
+          <span>{{photo.datetaken|date:'dd.MM.yyyy'}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </ng-template>
