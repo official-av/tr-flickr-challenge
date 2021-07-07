@@ -8,7 +8,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://official-av.github.io/tr-flickr-challenge">
+    <a href="http://tr-challenge.s3-website-us-east-1.amazonaws.com/">
       Demo
     </a>
     <span> | </span>
@@ -54,6 +54,7 @@
 - Better Root Layout
 - More Repsponsive UI for Mobile devices
 - Unit tests
+- Resolving dateupload timestamp and datetaken sort bug
 - Centralised Error handling with interceptor
 
 ## Contact
