@@ -1,7 +1,8 @@
 <ng-container *ngIf="photo">
   <div class="photo-details-wrapper">
     <!-- photo tags -->
-    <span class="photo-tags">{{(photo.tags.length > 10) ? (photo.tags|slice:0:10) + '..' : (photo.tags)}}</span>
+    <span *ngIf="photo.tags"
+          class="photo-tags">{{(photo.tags.length > 10) ? (photo.tags|slice:0:10) + '..' : (photo.tags)}}</span>
     <!-- photo views -->
     <span class="photo-views">{{photo.views}}</span>
     <!-- region photo-card  -->

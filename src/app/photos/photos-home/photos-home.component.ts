@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {PhotosService} from '../photos.service';
@@ -11,7 +11,8 @@ import {FlickrPhoto} from '../FlickrPhoto.interface';
 @Component({
   selector: 'app-photos-home',
   templateUrl: './photos-home.component.html',
-  styleUrls: ['./photos-home.component.scss']
+  styleUrls: ['./photos-home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotosHomeComponent {
   // region tags input config

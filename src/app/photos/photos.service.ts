@@ -9,6 +9,8 @@ import {FlickrPhoto} from './FlickrPhoto.interface';
   providedIn: 'root'
 })
 export class PhotosService {
+  private searchAPIURL = `${environment.apiURL}&format=json&nojsoncallback=1&extras=date_upload,date_taken, owner_name,views,url_q&sort=interestingness-desc`;
+
   /* region helpers for photos home page */
   sortByAction = new BehaviorSubject<string>('views');
   sortBy$ = this.sortByAction.asObservable().pipe(
@@ -16,7 +18,7 @@ export class PhotosService {
   );
   photosAction = new BehaviorSubject<FlickrPhoto[]>([] as FlickrPhoto[]);
   photos$ = this.photosAction.asObservable().pipe(
-    tap(photos => {
+    tap(photos => { // store state for photos requests
       localStorage.removeItem('photos');
       localStorage.setItem('photos', JSON.stringify(photos));
     })
@@ -35,7 +37,6 @@ export class PhotosService {
     });
     return photos;
   }))
-  /* endregion */
 
   selectPhotoAction = new BehaviorSubject<FlickrPhoto>({} as FlickrPhoto);
   selectedPhoto$ = this.selectPhotoAction.asObservable().pipe(
@@ -47,6 +48,9 @@ export class PhotosService {
     })
   );
 
+  /* endregion */
+
+  /* region helpers for photos details page */
   page = new BehaviorSubject<number>(1);
   page$ = this.page.asObservable();
   total = new BehaviorSubject<number>(0);
@@ -56,24 +60,27 @@ export class PhotosService {
     switchMap(([page, photo]) => this.getAllImagesWithPhoto(page, photo)),
     shareReplay());
 
-  private searchAPIURL = `${environment.apiURL}&format=json&nojsoncallback=1&extras=date_upload,date_taken, owner_name,views,url_q&sort=interestingness-desc`;
+  /* endregion */
 
   constructor(private http: HttpClient) {
-    // restore state from local storage
-    // restore for home page requests
+    // restore all state from local storage
     const photosString = localStorage.getItem('photos');
-    if (photosString) {
+    if (photosString) {     // restore for home page requests
       const photos = JSON.parse(photosString) as FlickrPhoto[];
       this.photosAction.next(photos);
     }
-    // restore for detail page selected photo
     const photoString = localStorage.getItem('photos');
-    if (photoString) {
+    if (photoString) {     // restore for detail page selected photo
       const photo = JSON.parse(photoString) as FlickrPhoto;
       this.selectPhotoAction.next(photo);
     }
   }
 
+  /**
+   * @alias getImageWithTags
+   * @param tags: string array containing tags
+   * @return FlickrPhoto Observable if search is successful else throws error
+   */
   public getImageWithTags(tags: string[]): Observable<FlickrPhoto> {
     const tagsString = tags.join(',');
     return this.http.get(`${this.searchAPIURL}&tags=${tagsString}&per_page=1`).pipe(
@@ -84,8 +91,8 @@ export class PhotosService {
           throw Error('No results found for this search criteria!');
         }
       }),
-      tap(res => res.tags = tagsString),
-      tap(res => {
+      tap(res => res.tags = tagsString), // attach tags to photo for future use
+      tap(res => { // insert newly made request to stored photos
         const curPhotos = this.photosAction.value;
         curPhotos.push(res);
         this.photosAction.next(curPhotos);
@@ -94,6 +101,12 @@ export class PhotosService {
     );
   }
 
+  /**
+   * @alias getAllImagesWithPhoto
+   * @param page - requested page count
+   * @param photo - photo to get tags
+   * @return FlickrPhoto array if search successful
+   */
   public getAllImagesWithPhoto(page: number, photo: FlickrPhoto): Observable<FlickrPhoto[]> {
     const tagsString = photo.tags;
     return this.http.get(`${this.searchAPIURL}&tags=${tagsString}&per_page=10&page=${page}`).pipe(
