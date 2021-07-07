@@ -25,8 +25,8 @@
 - [Overview](#overview)
   - [Built With](#built-with)
 - [Features](#features)
+- [Future Improvements](#future-improvements)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 <!-- OVERVIEW -->
 
@@ -43,10 +43,17 @@
 - RxJS
 - SCSS
 
+## Features
+- Flex based layout
+- RxJS based reactive UI
+- State management with RxJS and LocalStorage
+
 ## Future Improvements
 
-- Better Styling
+- Better Styling details
 - Better Root Layout
+- More Repsponsive UI for Mobile devices
+- Unit tests
 - Centralised Error handling with interceptor
 
 ## Contact
