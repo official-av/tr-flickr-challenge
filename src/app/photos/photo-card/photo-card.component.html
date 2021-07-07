@@ -1,0 +1,29 @@
+<ng-container *ngIf="photo">
+  <div class="photo-details-wrapper">
+    <!-- photo tags -->
+    <span class="photo-tags">{{(photo.tags.length > 10) ? (photo.tags|slice:0:10) + '..' : (photo.tags)}}</span>
+    <!-- photo views -->
+    <span class="photo-views">{{photo.views}}</span>
+    <!-- region photo-card  -->
+    <mat-card class="photo-card">
+      <!-- photo -->
+      <img class="search-photo" mat-card-image [src]="photo.url_q" alt="Photo Searched by Tag">
+      <mat-card-content fxLayout="column">
+        <!-- photo owner -->
+        <span class="photo-owner">{{photo.ownername|titlecase}}</span>
+        <!-- region dates -->
+        <div class="dates-wrapper" fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="5px">
+          <span>Uploaded</span>
+          <span class="date-details">{{photo.dateupload|date:'dd.MM.yyyy'}}</span>
+          <span>Taken</span>
+          <span class="date-details">{{photo.datetaken|date:'dd.MM.yyyy'}}</span>
+        </div>
+        <!-- endregion -->
+      </mat-card-content>
+      <mat-card-actions *ngIf="showAllImagesAction">
+        <button mat-button (click)="triggerShowAllImages()">Show All Images</button>
+      </mat-card-actions>
+    </mat-card>
+    <!-- endregion -->
+  </div>
+</ng-container>

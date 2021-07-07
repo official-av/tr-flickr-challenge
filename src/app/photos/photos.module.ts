@@ -6,12 +6,14 @@ import { PhotosHomeComponent } from './photos-home/photos-home.component';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import {SharedModule} from '../shared/shared.module';
 import {PhotosService} from './photos.service';
+import { PhotoCardComponent } from './photo-card/photo-card.component';
 
 
 @NgModule({
   declarations: [
     PhotosHomeComponent,
-    PhotoDetailsComponent
+    PhotoDetailsComponent,
+    PhotoCardComponent
   ],
   imports: [
     CommonModule,

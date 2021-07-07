@@ -1,1 +1,14 @@
-<p>photo-details works!</p>
+<div class="all-images-wrapper" fxLayout="column">
+  <!-- all images -->
+  <div class="images-listing" fxLayout="row wrap" fxLayoutGap="5px">
+    <ng-container *ngFor="let photo of photos$|async">
+      <app-photo-card [photo]="photo"></app-photo-card>
+    </ng-container>
+  </div>
+  <!-- paginator -->
+  <mat-paginator [length]="total$|async"
+                 pageSize="10"
+                 (page)="changePage($event)"
+  >
+  </mat-paginator>
+</div>

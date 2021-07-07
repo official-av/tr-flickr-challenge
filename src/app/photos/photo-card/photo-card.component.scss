@@ -1,0 +1,43 @@
+@import 'src/styles';
+
+.photo-details-wrapper {
+  position: relative;
+  font-family: $font-poppins;
+
+  .photo-views {
+    position: absolute;
+    color: white;
+    z-index: 2;
+    left: 30%;
+    font-size: 32px;
+    top: 32%;
+  }
+
+  .photo-tags {
+    margin: 0.5rem;
+    position: absolute;
+    background: white;
+    z-index: 2;
+    font-size: 18px;
+  }
+
+  .photo-card {
+    .photo-owner {
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .search-photo {
+      height: 150px;
+    }
+  }
+
+  .dates-wrapper {
+    .date-details {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
